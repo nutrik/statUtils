@@ -26,6 +26,13 @@ def gamma_shape_estimator(data, glm_gamma_fit, verbose=False, iter_limit=10, eps
         NumPy or Pandas vector 
     glm_gamma_fit: statsmodels class instance
         Fitted model instance of glm.fit(scale='dev') of statsmodels module
+    iter_limit: integer, optional
+        Upper limit on the number of iterations.
+    eps_max: float, optional
+        Maximum discrepancy between approximations for the iteration process to continue
+    verbose: bool, optional
+        If TRUE, causes successive iterations to be printed out. The initial estimate 
+        is taken from the deviance.    
     
     Local variables
     ---------------
@@ -37,13 +44,6 @@ def gamma_shape_estimator(data, glm_gamma_fit, verbose=False, iter_limit=10, eps
         Mean of GLM predicted values
     Dbar: float
         Scale / dispersion - MUST be similar to scale value from glm.fit(scale='dev')
-    iter_limit: integer
-        Upper limit on the number of iterations.
-    eps_max: float
-        Maximum discrepancy between approximations for the iteration process to continue
-    verbose: bool
-        If TRUE, causes successive iterations to be printed out. The initial estimate 
-        is taken from the deviance.
         
     Returns
     -------
@@ -57,6 +57,8 @@ def gamma_shape_estimator(data, glm_gamma_fit, verbose=False, iter_limit=10, eps
     
     References
     ----------
+    Source: https://cran.r-project.org/web/packages/MASS/index.html
+     
     Venables, W. N. and Ripley, B. D. (2002) Modern Applied Statistics with S. 
     Fourth edition. Springer.
     
