@@ -45,7 +45,7 @@ def enso_glm_model(glm_ds, leadtime=False, verbose=True):
         exog = glm_ds[['pc1_sst', 'pc2_sst', 'pc3_sst', 'pc1_tcd', 'pc2_tcd', 'pc3_tcd',\
                        'sc_sin_jn_lag1', 'sc_cos_jn_lag1']]
     
-    exog = sm.add_constant(exog, prepend=True) # Add intercept
+    exog = sm.add_constant(exog, prepend=True)
     
     glm = sm.GLM(endog, exog, family=sm.families.Gamma(sm.families.links.log))
     
@@ -53,7 +53,7 @@ def enso_glm_model(glm_ds, leadtime=False, verbose=True):
     # Psi is estimated from the sum of squares of the Pearson residuals
     # Residual deviance is very sensitive to small values y_i
     
-    glm_model = glm.fit(scale='dev') # scale='dev' !!!!!!!!!!!!!!!!!!!!!!
+    glm_model = glm.fit(scale='dev') # scale='dev' !!!!!
     
     if verbose:
         print(glm_model.summary())
@@ -76,7 +76,6 @@ def enso_glm_model(glm_ds, leadtime=False, verbose=True):
     
     gamma_scalevec = np.asarray(glm_model.mu) / fit_alfa
     gamma_shapevec = np.ones(len(endog)) * fit_alfa
-    #gamma_intens = np.asarray([np.random.gamma(shape = gamma_shapevec[i], scale = gamma_scalevec[i]) for i in range(len(endog))])
     
     return glm_model, gamma_scalevec, gamma_shapevec
 
