@@ -12,7 +12,6 @@ from   scipy.special import digamma, polygamma
 
 def gamma_shape_estimator(data, glm_gamma_fit, verbose=False, iter_limit=10, eps_max=1e-4):
     """
-    
     A glm fit (from statsmodels) for the Gamma family correctly calculates 
     the maximum likelihood estimate of the mean parameters but provides 
     only a crude estimate of the dispersion parameter. This function takes 
@@ -90,11 +89,11 @@ def gamma_shape_estimator(data, glm_gamma_fit, verbose=False, iter_limit=10, eps
     
     while np.abs(eps) > eps_max and itr <= iter_limit:
         
-        itr   = itr + 1
+        itr  += 1
         sc    = np.sum(A * (fixed + np.log(alpha) - digamma(A * alpha)))
         inf   = np.sum(A * (A * polygamma(1., A * alpha) - 1./alpha))
         eps   = sc/inf
-        alpha = alpha + eps
+        alpha+= eps
         
         if verbose: print("Iter. {} Alpha: {}".format(itr, alpha))
     
